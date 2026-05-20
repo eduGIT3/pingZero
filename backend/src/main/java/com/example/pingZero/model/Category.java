@@ -1,4 +1,4 @@
-package com.pingzero.backend.model;
+package com.example.pingZero.model;
 
 import jakarta.persistence.*;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    // Relación 1:N → una categoría tiene muchos productos
+    // Relación 1:M → una categoría tiene muchos productos
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> products;
 
