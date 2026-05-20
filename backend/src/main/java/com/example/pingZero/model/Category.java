@@ -1,6 +1,7 @@
 package com.example.pingZero.model;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Category {
 
     // Relación 1:N → una categoría tiene muchos productos
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     // Constructor vacío
     public Category() {}
