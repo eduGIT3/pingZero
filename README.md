@@ -8,7 +8,7 @@ Proyecto del equipo PingZero FP Dual NTT Data
 
 # Iniciar el proyecto
 ## Backend
-Ejecutamos el comando `mvnw.cmd spring-boot:run` en la terminal.  
+Ejecutamos el comando `mvn spring-boot:run` o `mvnw.cmd spring-boot:run` en la terminal.  
 La dirección del backend es `http://localhost:8080`. A esto le agregamos `/products` o la pagina a la que queramos acceder. 
 
 ### Base de datos: 
