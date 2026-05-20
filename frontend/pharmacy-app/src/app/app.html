@@ -1,0 +1,24 @@
+<header class="topbar">
+  <a class="brand" routerLink="/" aria-label="Inicio Farmacia PingZero">
+    <span class="brand-mark">+</span>
+    <span>{{ title() }}</span>
+  </a>
+
+  <nav class="nav" aria-label="Navegacion principal">
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/catalogo">Catalogo</a>
+    <a routerLink="/admin-productos">Gestion</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<router-outlet />
+
+<section id="contacto" class="contact">
+  <div>
+    <p class="eyebrow">Contacto</p>
+    <h2>Te esperamos en la farmacia</h2>
+    <p>Calle Mayor 24, Madrid - 910 000 000 - hola&#64;farmaciapingzero.es</p>
+  </div>
+  <a class="button primary" href="tel:910000000">Llamar ahora</a>
+</section>

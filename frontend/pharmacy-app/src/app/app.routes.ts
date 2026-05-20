@@ -1,6 +1,23 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { AdminProducts } from './pages/admin-products/admin-products';
+import { Catalog } from './pages/catalog/catalog';
+import { Home } from './pages/home/home';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent }
+  {
+    path: '',
+    component: Home,
+  },
+  {
+    path: 'catalogo',
+    component: Catalog,
+  },
+  {
+    path: 'admin-productos',
+    component: AdminProducts,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];

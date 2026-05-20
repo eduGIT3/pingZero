@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.example.pingZero.model.Product;
 import com.example.pingZero.repository.CategoryRepository;
 
 @RestController
+@CrossOrigin(originPatterns = { "http://localhost:*", "http://127.0.0.1:*" })
 @RequestMapping("/api/categories")
 public class CategoryController {
 

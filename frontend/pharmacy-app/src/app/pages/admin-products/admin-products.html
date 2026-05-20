@@ -1,0 +1,97 @@
+<main>
+  <section class="admin-hero">
+    <div>
+      <p class="eyebrow">Gestion interna</p>
+      <h1>Administrar productos</h1>
+      <p class="hero-text">
+        Crea, edita y elimina productos del catalogo conectado al backend de Spring.
+      </p>
+    </div>
+  </section>
+
+  <section class="section admin-section">
+    <form class="admin-form" [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <div class="section-heading">
+        <p class="eyebrow">{{ selectedProduct() ? 'Editar' : 'Nuevo' }}</p>
+        <h2>{{ selectedProduct() ? 'Editar producto' : 'Añadir producto' }}</h2>
+      </div>
+
+      <label>
+        Nombre
+        <input type="text" formControlName="name" placeholder="Ej. Paracetamol 500 mg" />
+      </label>
+
+      @if (productForm.controls.name.invalid && productForm.controls.name.touched) {
+        <p class="field-error">El nombre debe tener al menos 3 caracteres.</p>
+      }
+
+      <label>
+        Fabricante
+        <input type="text" formControlName="manufacturer" placeholder="Ej. Laboratorio SaludPlus" />
+      </label>
+
+      @if (productForm.controls.manufacturer.invalid && productForm.controls.manufacturer.touched) {
+        <p class="field-error">El fabricante debe tener al menos 2 caracteres.</p>
+      }
+
+      <label>
+        Categoria
+        <select formControlName="categoryId">
+          <option [value]="0">Selecciona una categoria</option>
+          @for (category of categories(); track category.id) {
+            <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+      </label>
+
+      @if (productForm.controls.categoryId.invalid && productForm.controls.categoryId.touched) {
+        <p class="field-error">Selecciona una categoria.</p>
+      }
+
+      <div class="form-actions">
+        <button class="button primary" type="submit">
+          {{ selectedProduct() ? 'Guardar cambios' : 'Crear producto' }}
+        </button>
+        @if (selectedProduct()) {
+          <button class="button secondary" type="button" (click)="cancelEdit()">Cancelar</button>
+        }
+      </div>
+
+      @if (message()) {
+        <p class="form-message">{{ message() }}</p>
+      }
+      @if (error()) {
+        <p class="form-message error">{{ error() }}</p>
+      }
+    </form>
+
+    <div class="admin-list">
+      <div class="section-heading">
+        <p class="eyebrow">Registros</p>
+        <h2>Productos guardados</h2>
+      </div>
+
+      @if (isLoading()) {
+        <p class="product-state">Cargando productos...</p>
+      } @else if (products().length === 0) {
+        <p class="product-state">No hay productos registrados.</p>
+      } @else {
+        <div class="admin-table">
+          @for (product of products(); track product.id) {
+            <article class="admin-row">
+              <div>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.manufacturer }} · {{ product.category?.name || 'Sin categoria' }}</p>
+              </div>
+
+              <div class="row-actions">
+                <button class="button secondary" type="button" (click)="editProduct(product)">Editar</button>
+                <button class="button danger" type="button" (click)="deleteProduct(product)">Eliminar</button>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </section>
+</main>

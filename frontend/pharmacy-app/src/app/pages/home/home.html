@@ -1,1 +1,78 @@
-<p>home works!</p>
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Farmacia de confianza</p>
+      <h1>Cuidado cercano para tu salud diaria</h1>
+      <p class="hero-text">
+        Medicamentos, productos de parafarmacia y asesoramiento profesional
+        en un espacio sencillo, claro y pensado para atenderte mejor.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="#productos">Ver destacados</a>
+        <a class="button secondary" routerLink="/catalogo">Catalogo completo</a>
+      </div>
+    </div>
+
+    <div class="hero-panel" aria-label="Resumen de atencion">
+      <span class="status">Abierto hoy</span>
+      <strong>09:00 - 21:00</strong>
+      <p>Entrega local, reservas y atencion personalizada.</p>
+    </div>
+  </section>
+
+  <section id="servicios" class="section">
+    <div class="section-heading">
+      <p class="eyebrow">Servicios</p>
+      <h2>Todo lo esencial en un solo lugar</h2>
+    </div>
+
+    <div class="service-grid">
+      <article class="card">
+        <span class="card-icon">Rx</span>
+        <h3>Dispensacion</h3>
+        <p>Gestion de recetas, medicamentos habituales y seguimiento de tratamientos.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon">24h</span>
+        <h3>Reservas</h3>
+        <p>Reserva productos y recoge tu pedido cuando te venga mejor.</p>
+      </article>
+      <article class="card">
+        <span class="card-icon">OK</span>
+        <h3>Consejo farmaceutico</h3>
+        <p>Orientacion clara para bienestar, dermocosmetica y cuidado familiar.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="productos" class="section products-band">
+    <div class="section-heading split-heading">
+      <div>
+        <p class="eyebrow">Destacados</p>
+        <h2>Productos destacados</h2>
+      </div>
+      <a class="button secondary" routerLink="/catalogo">Ver todos</a>
+    </div>
+
+    <div class="product-list">
+      @if (isLoadingProducts()) {
+        <p class="product-state">Cargando productos...</p>
+      } @else if (productLoadError()) {
+        <p class="product-state error">{{ productLoadError() }}</p>
+      } @else if (featuredProducts().length === 0) {
+        <p class="product-state">Todavia no hay productos registrados.</p>
+      } @else {
+        @for (product of featuredProducts(); track product.id) {
+          <article class="product">
+            <div>
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.manufacturer }}</p>
+            </div>
+            <span>{{ product.category?.name || 'Sin categoria' }}</span>
+          </article>
+        }
+      }
+    </div>
+  </section>
+</main>

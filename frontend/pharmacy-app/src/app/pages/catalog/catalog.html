@@ -1,0 +1,80 @@
+<main>
+  <section class="catalog-hero">
+    <div>
+      <p class="eyebrow">Catalogo</p>
+      <h1>Todos los productos</h1>
+      <p class="hero-text">
+        Consulta el listado completo de productos disponibles en la farmacia,
+        con laboratorio, categoria y datos rapidos para organizar mejor cada pedido.
+      </p>
+    </div>
+
+    <div class="catalog-summary">
+      <span>Total</span>
+      <strong>{{ totalProducts() }}</strong>
+      <p>productos registrados</p>
+    </div>
+  </section>
+
+  <section class="section catalog-section">
+    @if (isLoadingProducts()) {
+      <p class="product-state">Cargando catalogo...</p>
+    } @else if (productLoadError()) {
+      <p class="product-state error">{{ productLoadError() }}</p>
+    } @else if (products().length === 0) {
+      <p class="product-state">Todavia no hay productos registrados.</p>
+    } @else {
+      <div class="category-filter" aria-label="Filtrar productos por categoria">
+        <button
+          type="button"
+          [class.active]="selectedCategory() === 'Todas'"
+          (click)="selectCategory('Todas')"
+        >
+          Todos
+        </button>
+
+        @for (category of categories(); track category) {
+          <button
+            type="button"
+            [class.active]="selectedCategory() === category"
+            (click)="selectCategory(category)"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+
+      <p class="catalog-count">
+        Mostrando {{ filteredProducts().length }} de {{ totalProducts() }} productos
+      </p>
+
+      <div class="catalog-grid">
+        @for (product of filteredProducts(); track product.id) {
+          <article class="catalog-card">
+            <div class="catalog-card-header">
+              <span>{{ product.category?.name || 'Sin categoria' }}</span>
+            </div>
+
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.manufacturer }}</p>
+
+            <dl class="product-details">
+              <div>
+                <dt>Estado</dt>
+                <dd>Disponible</dd>
+              </div>
+              <div>
+                <dt>Recogida</dt>
+                <dd>En farmacia</dd>
+              </div>
+              <div>
+                <dt>Categoria</dt>
+                <dd>{{ product.category?.name || 'Pendiente' }}</dd>
+              </div>
+            </dl>
+          </article>
+        }
+      </div>
+    }
+  </section>
+</main>
