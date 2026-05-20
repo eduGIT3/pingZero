@@ -16,4 +16,7 @@ Para acceder a la consola de la base de datos usamos esta dirección: `http://lo
 
 >**DBC URL:**  jdbc:h2:mem:pharmacydb    
 >**User:** SA    
->**Password:** 
+>**Password:**
+
+## Frontend
+Ejecutamos `ng serve` para iniciar el proyecto.
